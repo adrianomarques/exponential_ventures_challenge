@@ -1,6 +1,7 @@
 import Countdown from 'react-countdown-now';
 import { useSelector } from 'react-redux'
 import React, { useState, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -23,16 +24,13 @@ function useInterval(callback, delay) {
   }
 
 export default function Clock(props) {
-    // const time = useSelector(state => state.time)
+    const history = useHistory()
     const style = {"fontSize": 70, "fontFamily": "Iceberg", "paddingRight": "10px"}
     const [time, setTime ] = useState(useSelector(state => state.time)) 
-    const [finished, setFinished ] = useState(false) 
 
     const check_time = (time) => {
-        if (time <= Date.now() && !finished) {
-            setFinished(true)
-            props.setStage('')
-            props.fetchStage("dead_1")
+        if (time <= Date.now()) {
+            history.push('/gameover')
         }
     }
     useInterval(() => {

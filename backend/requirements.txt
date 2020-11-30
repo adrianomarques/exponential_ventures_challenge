@@ -12,3 +12,4 @@ Flask-Migrate
 redis==3.4.1
 requests==2.23.0
 flask_cors==3.0.9
+bcrypt

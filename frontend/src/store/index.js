@@ -1,21 +1,23 @@
 import { createStore } from 'redux'
 
-const INITIAL_STATE =  {
-    'life': 3,
-    'time': Date.now() + 500000
+const STATE =  {
+    'correct_answer': '',
+    'score': 0,
+    'time': Date.now() + 150000
 }
 
-function courses(state=INITIAL_STATE, action) {
-
+function courses(state=STATE, action) {
     switch (action.type) {
-        case 'ADD_LIFE':
-            return {...state, life : state.life + Number(action.size)}
-        case 'REMOVE_LIFE':
-            return {...state, life : state.life - Number(action.size)}
-        case 'ADD_TIME':
-            return {...state, time : [...state.data.time, ...state.data.time + Number(action.size)]}
-        case 'REMOVE_TIME':
-            return {...state, time : [...state.data.time, ...state.data.time - Number(action.size)]}
+        case 'SET_ANSWER':
+            return {...state, correct_answer: action.correct_answer}
+        case 'INCREASE_SCORE':
+            return {...state, score: state.score + 1}
+        case 'START_GAME':
+            return {
+                'correct_answer': '',
+                'score': 0,
+                'time': Date.now() + 150000
+            }
         default:
             return state
     }

@@ -1,30 +1,9 @@
-## Full-Stack Software Engineer Qualification Challenge
+## THE CHALLENGE
 
-### About the role and company
-
-At Exponential Ventures, we’re continually creating new products and businesses, and as a Full-Stack Software Engineer, 
-you’d be responsible for implementing all aspects of the product, following all of the industry’s best practices 
-while quickly delivering a performant and scalable product that you’ll be proud of.
-
-We’d like to see how you can handle yourself implementing from scratch the frontend and backend of a simple application 
-based on our description of the vision and the stated requirements. We’d like to see your submission implemented using 
-Python for the backend, and React for the frontend.
-
-Your submission will be evaluated as a whole, but we won’t fret if your design isn’t made by unicorns. We’ll be focusing
- on the correct implementation of the vision, the quality of the code, the application of best practices, and the 
- product’s overall experience.
-
-
-This project is only going to be used to evaluate your skill set, and it will never be shared or used commercially.
-
-
-### The idea - A Quiz App
-
-Nowadays, it has become popular amongst internet users to spend some of their time testing their general 
+Nowadays, it has become popular among internet users to spend some of their time testing their general 
 knowledge through quizzes (and brag about it when they ace it). The idea is to design the prototype for a 
 quiz app that is pleasant, engaging, and easy to use. In the end, we’ll inform the user about his performance 
 and translate those results into a grade.
-
 
 #### Requirements
 
@@ -33,21 +12,6 @@ Each question has only four possible answers, of which only one is correct.
 
 On top of showing the grade, show statistics on how the user’s answers compared to the other users that 
 answered these questions before
-
-On the results page, show a range of different expertise levels for each grade bracket with a short description
- for each expertise level. E.g.
-
-* Score 0-2: Clueless. Don’t be discouraged! Learn some more about this topic, and come back to try again!
-
-* Score 3-5: Beginner. This is the level most players end up with after answering this quiz for the first time.
- Learn some more about this topic and come back to try again!
-
-* Score 5-8: Confident: This is the level players are getting pro! Continue your progress and rock it!
-
-* Score 8-10: Expert: This is the highest level achievable! Thanks for being awesome as you are!
-
-Show the time it took to answer the quiz.
-
 
 
 We encourage you to work with your creativity, implementing features and quizzes that you would like to see 
@@ -70,21 +34,118 @@ Sign up page for new users.
 
 Testing coverage - Testing is highly encouraged as a bonus feature
 
+## MY SOLUTION
 
-### What do we expect?
+[![Python](https://img.shields.io/badge/python-3.6-blue.svg)]() [![React](https://img.shields.io/badge/node-14.15.1-red.svg)]()
+
+My template base to build Flask RESTful APIs using [Flask RESTPlus](https://flask-restplus.readthedocs.io/en/stable/index.html)
 
 
-Use some Python 3.X compatible web framework
 
-We highly recommend that you create your project using Docker. This will make our evaluation easier and will 
-guarantee that your assessment won't fail due to differences between the development and test environments. 
-Any project that takes an inordinate amount of effort to run may be discarded as part of the work of a 
-Fullstack Engineer is to make sure that the project can run in their intended environments
+## Requeriments
+Install Docker 
+```
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
 
-Documentation explaining how to run and use the application on a README.md file Git repository of the challenge.
+Install Docker Compose
+```
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+## Usage
+On docker-compose.yml folder, open terminal and hit:
+```
+docker-compose up
+```
 
-Finish your project before sending it; we won't accept modifications after submission.
 
-If you have any questions or doubts about this challenge, send an email to recruiting@xnv.io.
+## Swagger
 
-This prototype and wireframes will not be used commercially and will be discarded after evaluation.
+After the application goes up, open your browser on `localhost:5003/docs` to see the self-documented interactive API:
+
+![](/imgs/swagger.png)
+
+
+## Backend - Project Structure
+
+```
+.
+├── alembic.ini
+├── api
+│   └── blueprints
+│       ├── auth
+│       │   ├── models.py
+│       │   ├── routes.py
+│       │   ├── serializers.py
+│       │   └── services.py
+│       └── game
+│           ├── __init__.py
+│           ├── routes.py
+│           ├── serializers.py
+│           └── services.py
+├── app.py
+├── config.py
+├── Dockerfile
+├── entrypoint.sh
+├── manage.py
+├── migrations
+├── requirements.txt
+└── wait-for-it.sh
+
+```
+
+### Files
+
+* `app` - All the RESTful API implementation is here.
+* `app/blueprints` - Resource agroupment for all `v1` [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces).
+* `config.py` - Config file for envs, global config vars and so on.
+* `Dockerfile` - Dockerfile used to build a Docker image (using [Docker Multistage Build](https://docs.docker.com/develop/develop-images/multistage-build/))
+* `.dockerignore` - Lists files and directories which should be ignored while Docker build process.
+* `.gitignore` - Lists files and directories which should not be added to git repository.
+* `requirements.txt` - All project dependencies.
+* `app.py` - The Application entrypoint.
+
+
+## Frontend - Project Structure
+
+```
+.
+.
+├── Dockerfile
+├── package.json
+├── public
+├── src
+│     ├── App.js
+│     ├── App.scss
+│     ├── components
+│     │     ├── CardAction
+│     │     │     ├── index.js
+│     │     │     └── styles.scss
+│     │     ├── Clock
+│     │     ├── IntroWindow
+│     │     ├── MainWindow
+│     │     ├── Score
+│     │     └── TextBox
+│     ├── router
+│     │     ├── index.js
+│     │     ├── PrivateRoute
+│     │     ├── PublicRoute
+│     │     └── Routes.js
+│     ├── store
+│     └── views
+│         ├── GameOverView
+│         │     ├── index.js
+│         │     └── styles.scss
+│         ├── GameView
+│         └── IntroView
+└── yarn.lock
+
+
+```
+
+### Files
+* `src/components` - All the UI components.
+* `src/router` - All the routes of your projects. 
+* `src/store` - The Vuex constants splited in actions, mutations and getters.
+* `src/views` -  A template of components on a route.
+* `package.json` - The NPM package meta file that contains all the build dependencies and build commands

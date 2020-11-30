@@ -5,7 +5,7 @@ from api.blueprints.game import api
 
 
 @api.route('/question')
-class Game(Resource):
+class Question(Resource):
 
     @api.doc(responses={
         200: 'Success',
@@ -17,3 +17,4 @@ class Game(Resource):
         Return a question
         """
         return Questions.get_question()
+

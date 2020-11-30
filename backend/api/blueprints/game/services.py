@@ -1,8 +1,4 @@
-import json
-from bson.json_util import dumps
 import logging
-from api.blueprints import db
-from flask_restplus import abort
 import requests
 
 

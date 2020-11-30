@@ -5,44 +5,69 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import Clock from './../Clock'
 import TextBox from './../TextBox'
+import Score from './../Score'
 import CardAction from './../CardAction'
-import { useSelector } from 'react-redux'
-import ReactHtmlParser from 'react-html-parser';
+import { useSelector, useDispatch } from 'react-redux'
+import ReactHtmlParser from 'react-html-parser'
+import { useHistory } from 'react-router-dom';
 import "./styles.scss";
 
 export default function MainWindow() {
-    const time = useSelector(state => state.time)
+    const dispatch = useDispatch()
+    const history = useHistory()
 
+    const time = useSelector(state => state.time)
     const [answers, setAnswers] = useState([])
-    const [question, setQuestion] = useState()
-    const [indexQuestion, setIndexQuestion] = useState(0)
+    const [question, setQuestion] = useState() 
+    const [questionsAsked, setQuestionsAsked] = useState(0) 
+
+
+    const checkGameOver = (questions_asked) => {
+        if (questions_asked >= 10) {
+            history.push("/gameover")
+        } 
+    }
+    const shuffle = array => {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+        while (0 !== currentIndex) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+      
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+        return array;
+      }
 
     const parseAnswers = data => {
-        setAnswers(
-            data[indexQuestion]['incorrect_answers'].concat(
-                data[indexQuestion]['correct_answer']
-            )
-        )
+        var parsed_answers = []
+        data['incorrect_answers'].concat(data['correct_answer']).map(answer => {
+            parsed_answers.push(ReactHtmlParser(answer)[0])
+        })
+        setAnswers(shuffle(parsed_answers))
     }
 
     const parseQuestion = data => {
-        var parsed_text = ReactHtmlParser(data[indexQuestion]['question'])
+        var parsed_text = ReactHtmlParser(data['question'])
         setQuestion(parsed_text[0])
     }
 
-    const getAllStages = () => {
-        axios.get(`http://${process.env.REACT_APP_BACKEND_API}/game/question`)
+    const getQuestion = () => {
+        axios.get(`http://${process.env.REACT_APP_BACKEND_HOST}:5003/game/question`)
         .then(response => {
-            console.log(response.data[indexQuestion])
             parseAnswers(response.data)
             parseQuestion(response.data)
+            dispatch({type: 'SET_ANSWER', correct_answer: response.data.correct_answer})
         })
         .catch(error => {
             console.error(error.message)
         })
     }
 
-    useEffect( () => { getAllStages("introduction_0") }, [] )
+    useEffect( () => { dispatch({type: 'START_GAME'}) }, [] )
+    useEffect( () => { getQuestion() }, [] )
+    useEffect( () => { checkGameOver(questionsAsked) }, [questionsAsked] )
 
     let textbox = <></>
     if (question) {
@@ -70,6 +95,7 @@ export default function MainWindow() {
                             <Grid
                             item
                             >
+                                <Score/>
                             </Grid>
                             <Grid
                             item
@@ -97,7 +123,12 @@ export default function MainWindow() {
                         alignItems="stretch"
                         >   
                             <CardAction
-                            actions={[{'type': 'actions', 'text': 'actions', 'size': 1}]}
+                            answers={answers}
+                            getQuestion={getQuestion}
+                            setQuestion={setQuestion}
+                            setAnswers={setAnswers}
+                            setQuestionsAsked={setQuestionsAsked}
+                            questionsAsked={questionsAsked}
                             />
                         </Grid>
                     </Grid>

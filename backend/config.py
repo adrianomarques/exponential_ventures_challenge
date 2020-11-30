@@ -14,7 +14,7 @@ class BaseConfig:
 
 
 class DevConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = 'mssql+pymssql://sa:{USER}@{PASSWORD}@{HOST}:{PORT}/master'
+    SQLALCHEMY_DATABASE_URI = 'mssql+pymssql://sa:game@123@mssql_db:1433/master'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
