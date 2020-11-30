@@ -69,8 +69,10 @@ After the application goes up, open your browser on `localhost:5003/docs` to see
 ![](screenshot2.png)
 
 
+
 ## Backend - Project Structure
-``
+
+```
 .
 ├── alembic.ini
 ├── api
