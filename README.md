@@ -35,10 +35,12 @@ Sign up page for new users.
 Testing coverage - Testing is highly encouraged as a bonus feature
 
 ## MY SOLUTION
-
 [![Python](https://img.shields.io/badge/python-3.6-blue.svg)]() [![React](https://img.shields.io/badge/node-14.15.1-red.svg)]()
 
-My template base to build Flask RESTful APIs using [Flask RESTPlus](https://flask-restplus.readthedocs.io/en/stable/index.html)
+![](screenshot1.png)
+
+
+My template base to build is SQL Server on Database, React on frontend and Flask APIs using [Flask RESTPlus](https://flask-restplus.readthedocs.io/en/stable/index.html)
 
 
 
@@ -63,7 +65,7 @@ docker-compose up
 
 After the application goes up, open your browser on `localhost:5003/docs` to see the self-documented interactive API:
 
-![](/imgs/swagger.png)
+![](screenshot2.png)
 
 
 ## Backend - Project Structure
