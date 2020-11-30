@@ -37,7 +37,6 @@ Testing coverage - Testing is highly encouraged as a bonus feature
 ## MY SOLUTION
 [![Python](https://img.shields.io/badge/python-3.6-blue.svg)]() [![React](https://img.shields.io/badge/node-14.15.1-red.svg)]()
 
-![](screenshot1.png)
 
 
 My template base to build is SQL Server on Database, React on frontend and Flask APIs using [Flask RESTPlus](https://flask-restplus.readthedocs.io/en/stable/index.html)
@@ -59,7 +58,9 @@ On docker-compose.yml folder, open terminal and hit:
 ```
 docker-compose up
 ```
+After the application goes up, open your browser on `localhost:3000`
 
+![](screenshot1.png)
 
 ## Swagger
 
@@ -69,8 +70,7 @@ After the application goes up, open your browser on `localhost:5003/docs` to see
 
 
 ## Backend - Project Structure
-
-```
+``
 .
 ├── alembic.ini
 ├── api
