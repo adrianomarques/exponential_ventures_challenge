@@ -74,7 +74,6 @@ After the application goes up, open your browser on `localhost:5003/docs` to see
 
 ```
 .
-├── alembic.ini
 ├── api
 │   └── blueprints
 │       ├── auth
@@ -92,6 +91,7 @@ After the application goes up, open your browser on `localhost:5003/docs` to see
 ├── Dockerfile
 ├── entrypoint.sh
 ├── manage.py
+├── alembic.ini
 ├── migrations
 ├── requirements.txt
 └── wait-for-it.sh
@@ -103,7 +103,7 @@ After the application goes up, open your browser on `localhost:5003/docs` to see
 * `app` - All the RESTful API implementation is here.
 * `app/blueprints` - Resource agroupment for all `v1` [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces).
 * `config.py` - Config file for envs, global config vars and so on.
-* `Dockerfile` - Dockerfile used to build a Docker image (using [Docker Multistage Build](https://docs.docker.com/develop/develop-images/multistage-build/))
+* `Dockerfile` - Dockerfile used to build a Docker image.
 * `.dockerignore` - Lists files and directories which should be ignored while Docker build process.
 * `.gitignore` - Lists files and directories which should not be added to git repository.
 * `requirements.txt` - All project dependencies.
