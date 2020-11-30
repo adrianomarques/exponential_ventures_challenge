@@ -114,7 +114,6 @@ After the application goes up, open your browser on `localhost:5003/docs` to see
 
 ```
 .
-.
 ├── Dockerfile
 ├── package.json
 ├── public
